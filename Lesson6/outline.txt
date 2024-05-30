@@ -1,0 +1,3 @@
+- hiển thị dữ liệu ( mock data cung cấp )
+- thực hiện thêm mới dữ liệu
+- sửa đổi dữ liệu
