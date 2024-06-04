@@ -2,6 +2,8 @@ import React from 'react'
 
 export default function TDTDListTask({renderTDTDListTask}) {
     console.log(renderTDTDListTask);
+
+    
     //render data
     let TDTDElement = renderTDTDListTask.map((task,index) =>{
         return (
