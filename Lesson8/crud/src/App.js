@@ -1,40 +1,21 @@
-import "./App.css";
-import { React, useEffect, useState } from "react";
-import TDTDListTask from "./component/TDTDListTask";
-import TDTDAddEditAndDelete from "./component/TDTDAddEditAndDelete";
-function App() {
-  // Mock data
-  const tdtd_listTasks = [
-    {
-      tdtd_taskId: 2210900096,
-      tdtd_taskName: "Tạ Đình Thành Doanh",
-      tdtd_level: "Small",
-    },
-    {
-      tdtd_taskId: 1,
-      tdtd_taskName: "Học lập trình frontend",
-      tdtd_level: "Small",
-    },
-    {
-      tdtd_taskId: 2,
-      tdtd_taskName: "Học lập trình reactjs",
-      tdtd_level: "Medium",
-    },
-    {
-      tdtd_taskId: 3,
-      tdtd_taskName: "Lập trình với Frontend - Reactjs",
-      tdtd_level: "High",
-    },
-    {
-      tdtd_taskId: 4,
-      tdtd_taskName: "Lập trình Fullstack (PHP, Java, NetCore)",
-      tdtd_level: "Small",
-    },
-  ];
+import './App.css';
+import { React,useState,useEffect } from 'react';
+import List from './components/List';
+import CRUD from './components/CRUD';
 
+function App() {
+
+  const tdtdListStudent = [
+    {tdtdId : 2210900096 , tdtdName : "Doanh", tdtdAge : "20" , tdtdPhone : "0123456789", tdtdStatus : false},
+    {tdtdId : 2210900096 , tdtdName : "Doanh", tdtdAge : "20" , tdtdPhone : "0123456789", tdtdStatus : true},
+    {tdtdId : 2210900096 , tdtdName : "Doanh", tdtdAge : "20" , tdtdPhone : "0123456789", tdtdStatus : false},
+   ];
+  
+  const [students,setStudents] = useState(tdtdListStudent);
+  
   let data = JSON.parse(localStorage.getItem("hehe"));
   if(data === null || data.length === 0){
-    data = tdtd_listTasks;
+    data = tdtdListStudent;
     localStorage.getItem("hehe",JSON.stringify(data));
   }
   const [tdtdListTaskAdd,setTdtdListTaskAdd] = useState(data)
@@ -42,7 +23,7 @@ function App() {
     localStorage.setItem("hehe",JSON.stringify(tdtdListTaskAdd))
   },[tdtdListTaskAdd]);
   // sử dụng hàm useState để lưu trữ trạng thái dữ liệu
-  const [tdtdListTasks, settdtdListTasks] = useState(tdtd_listTasks);
+  const [tdtdListTasks, settdtdListTasks] = useState(tdtdListStudent);
 
   // tạo state dữ liệu cho form (add, edit)
   // Đối tượng task
@@ -97,23 +78,15 @@ function App() {
   }
   return (
     <div className="container border">
-      <h1>Tạ Đình Thành Doanh - K22CNT2</h1>
-      <hr />
-      <div>
-        {/* Danh sách list task  */}
-        <TDTDListTask
-          rendertdtdListTasks={tdtdListTasks}
-          ontdtdTaskEdit={tdtdHandleEdit}
-          ontdtdTaskDelete = {tdtdHandleDelete}
-        />
-      </div>
+      <h1>Doanh</h1>
+      <hr/>
+      <div><List renderStudentList = {students}
+        ontdtdTaskEdit={tdtdHandleEdit}
+        ontdtdTaskDelete = {tdtdHandleDelete} /></div>
       <button onClick={handleAdd}> Thêm mới </button>
-      <div>
-        <TDTDAddEditAndDelete 
-            rendertdtdTask = {tdtdTask}
+      <div><CRUD rendertdtdTask = {tdtdTask}
             rendertdtdIsAddOrEdit = {tdtdIsAddOrEdit}
-            tdtdOnSubmit={tdtdHandleSubmit} />
-      </div>
+            tdtdOnSubmit={tdtdHandleSubmit}/></div>
     </div>
   );
 }

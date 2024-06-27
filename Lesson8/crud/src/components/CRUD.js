@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useState , useEffect } from 'react';
 
-export default function TDTDAddEditAndDelete({rendertdtdTask, rendertdtdIsAddOrEdit,tdtdOnSubmit}) {
-    // // Đối tượng task
-    // const tdtdTaksObj = {
-    //     tdtd_taskId:0, 
-    //     tdtd_taskName:"",
-    //     tdtd_level:""
-    // }
+export default function CRUD({rendertdtdTask, rendertdtdIsAddOrEdit,tdtdOnSubmit}) {
     const [tdtdTask, settdtdTask] = useState(rendertdtdTask);
     useEffect(()=>{
         settdtdTask(rendertdtdTask)
@@ -52,9 +47,8 @@ export default function TDTDAddEditAndDelete({rendertdtdTask, rendertdtdIsAddOrE
     
                 <select name='tdtd_level' value={tdtdTask.tdtd_level} onChange={tdtdHandleChange}  className="form-control" 
                     aria-describedby="basic-addon"> 
-                    <option value={'Small'}>Small</option>
-                    <option value={'Medium'}>Medium</option>
-                    <option value={'High'}>High</option>
+                    <option value={'True'}>True</option>
+                    <option value={'False'}>False</option>
                 </select>
             </div>
             <button onClick={tdtdHandleSubmit} className='btn btn-primary'>Ghi lại</button>
