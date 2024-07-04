@@ -1,21 +1,28 @@
 import React from 'react'
+import axios from '../api/TdtdApi';
 
-export default function TdtdListUser({render}) {
+export default function TdtdListUser({render,submit}) {
     //hine thi du lieu
     let tdtdUserElement = render.map((tdtdUser,index)=>{
         return(
-            <>
-                <tr>
+                <tr key={index}>
                     <td>{tdtdUser.id}</td>
                     <td>{tdtdUser.Username}</td>
                     <td>{tdtdUser.Password}</td>
                     <td>{tdtdUser.Email}</td>
                     <td>{tdtdUser.Phone}</td>
-                    <td>...</td>
+                    <td>
+                        <button className='btn btn-outline-danger' onClick={()=>handleDelete(tdtdUser)}>Delete</button>
+                    </td>
                 </tr>
-            </>
         )
     })
+    const handleDelete = async (param) => {
+        if(window.confirm("Delete ?")){
+            const tdtdRespond = await axios.delete("tdtdUser/" + param.id);
+        }
+        submit(false);
+    }
   return (
     <div className='row'>
         <table className='table table-bordered'>
